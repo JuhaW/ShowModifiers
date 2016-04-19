@@ -7,7 +7,7 @@ bl_info = {
 	"description": "Show selected objects modifiers/select objects based on modifier",
 	"warning": "beta",
 	"wiki_url": "",
-	"category": "OBJECT",
+	"category": "Object",
 }
 
 import bpy
@@ -19,7 +19,6 @@ class ModifierPanel(bpy.types.Panel):
 	bl_region_type = "TOOLS"
 	#bl_category = "Trees"
 
-
 	
 	def draw(self, context):
 		
@@ -29,20 +28,14 @@ class ModifierPanel(bpy.types.Panel):
 		row = layout.row()
 		row.prop(context.scene, 'ShowModTab', "Open on modifiers tab")
 		
-		#E = Exec_ShowModifiers
-		#print ("modifiers:",V.modifiers)
+		col = layout.column()
+		col = col.column_flow(columns = 2, align = False)
 		for j,i in enumerate(V.modifiers):
-			if (j & 1) == 0:
-				row = layout.row(align = True)
-				#print ("j and 2:",j)
-			#row.label("(" + str(V.modcount[i]) + ")" + i)
-			index = row.operator('exec.selectmodifierobjects',text = "(" + str(V.modcount[i]) + ")" + i)
+			index = col.operator('exec.selectmodifierobjects',text = "(" + str(V.modcount[i]) + ")" + i)
 			index.modifier = i
-		row = layout.row(align = True)
 		if V.no_modifiers:
-			row.operator('exec.selectnomodifierobjects', "(" + str(len(V.no_modifiers)) + ")" + "No Modifiers")
-		#row.label(Exec_ShowModifiers.apina[0])
-		#row.label(Exec_ShowModifiers.apina[1])
+			col.alert = True
+			col.operator('exec.selectnomodifierobjects', "(" + str(len(V.no_modifiers)) + ")" + "No Modifiers")
 
 class V():
 	
