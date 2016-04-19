@@ -143,6 +143,7 @@ def register():
 
 def unregister():
 	bpy.utils.unregister_module(__name__)
+	del bpy.types.Scene.ShowModTab
 	
 
 if __name__ == "__main__":
