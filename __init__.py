@@ -48,10 +48,21 @@ def show_modifier_tab(modifier):
 	
 	for area in bpy.context.screen.areas:
 		if area.type == 'PROPERTIES':
-			try:
-				area.spaces[0].context = 'MODIFIER'
-			except:
-				pass
+			if modifier in ('CLOTH', 'COLLISION', 'FLUID_SIMULATION', 'SMOKE','SOFT_BODY'):
+				try:
+					area.spaces[0].context = 'PHYSICS'
+				except:
+					pass
+			elif modifier in ('PARTICLE_SYSTEM'):
+				try:
+					area.spaces[0].context = 'PARTICLES'
+				except:
+					pass	
+			else:
+				try:
+					area.spaces[0].context = 'MODIFIER'
+				except:
+					pass
 				
 	o = bpy.context.object
 	bool = [i.type in (modifier) for i in o.modifiers]
