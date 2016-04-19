@@ -6,7 +6,7 @@ bl_info = {
 	"location": "Tools",
 	"description": "Show selected objects modifiers/select objects based on modifier",
 	"warning": "beta",
-	"wiki_url": "",
+	"wiki_url": "https://github.com/JuhaW/ShowModifiers",
 	"category": "Object",
 }
 
