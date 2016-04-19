@@ -1,3 +1,14 @@
+bl_info = {
+	"name": "Show Modifiers",
+	"author": "JuhaW",
+	"version": (1, 0, 0),
+	"blender": (2, 77, 0),
+	"location": "Tools",
+	"description": "Show selected objects modifiers/select objects based on modifier",
+	"warning": "beta",
+	"wiki_url": "",
+	"category": "OBJECT",
+}
 
 import bpy
 from collections import Counter
