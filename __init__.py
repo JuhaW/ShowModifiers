@@ -149,7 +149,6 @@ def register():
 	bpy.types.Scene.ShowModTab = bpy.props.BoolProperty(default = True)
 	bpy.types.Scene.ApplyModifier = bpy.props.BoolProperty(default = False)
 	
-
 def unregister():
 	bpy.utils.unregister_module(__name__)
 	del bpy.types.Scene.ShowModTab
