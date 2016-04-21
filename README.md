@@ -6,4 +6,4 @@ Press modifier button and all previously selected objects using that modifier wi
 
 [x] Open on modifiers tab, shows modifier tab, only that modifier is opened, other modifiers are closed
 
-![](http://puu.sh/oo2io/25d70be9d7.png)
+![](http://puu.sh/oqk6C/65529150b0.png)
