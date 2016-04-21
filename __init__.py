@@ -98,7 +98,7 @@ class Exec_SelectModifierObjects(bpy.types.Operator):
 	bl_label = "Select"
 	
 	modifier = bpy.props.StringProperty()
-	
+	bool = False
 	def execute(self, context):
 		
 		bpy.ops.object.select_all(action='DESELECT')
@@ -112,8 +112,16 @@ class Exec_SelectModifierObjects(bpy.types.Operator):
 					bpy.context.scene.objects.active = o
 					if context.scene.ApplyModifier:
 						apply_modifier(i.name)
+						self.bool = True
 		if context.scene.ShowModTab:
 			show_modifier_tab(self.modifier)
+		if self.bool:
+			self.bool = False
+			bpy.ops.object.select_all(action='DESELECT')
+			for i in V.sel_objects:
+				i.select = True
+			Exec_ShowModifiers.execute(self, context)
+			Exec_SelectModifierObjects.execute(self, context)
 			
 		return {'FINISHED'}
 	
