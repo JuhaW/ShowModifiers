@@ -151,6 +151,7 @@ class Exec_ShowModifiers(bpy.types.Operator):
 		return {'FINISHED'}
 
 
+
 def register():
 	
 	bpy.utils.register_module(__name__)
