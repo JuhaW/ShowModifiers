@@ -27,6 +27,7 @@ class ModifierPanel(bpy.types.Panel):
 		row.operator('exec.showmodifiers')
 		row = layout.row()
 		row.prop(context.scene, 'ShowModTab', "Open on modifiers tab")
+		row.prop(context.scene, 'ApplyModifier', "Apply modifier")
 		
 		col = layout.column()
 		col = col.column_flow(columns = 2, align = False)
@@ -43,7 +44,13 @@ class V():
 	modcount = []
 	sel_objects = []
 	no_modifiers = []
-
+def apply_modifier(mod_name):
+	try:
+		bpy.ops.object.modifier_apply(modifier=mod_name)
+	except RuntimeError as ex:
+		# print the error incase its important... but continue
+		print(ex)
+		
 def show_modifier_tab(modifier):
 	
 	for area in bpy.context.screen.areas:
@@ -103,7 +110,8 @@ class Exec_SelectModifierObjects(bpy.types.Operator):
 
 					o.select = True
 					bpy.context.scene.objects.active = o
-
+					if context.scene.ApplyModifier:
+						apply_modifier(i.name)
 		if context.scene.ShowModTab:
 			show_modifier_tab(self.modifier)
 			
@@ -134,17 +142,18 @@ class Exec_ShowModifiers(bpy.types.Operator):
 		
 		return {'FINISHED'}
 
-			
+
 def register():
 	
 	bpy.utils.register_module(__name__)
-	bpy.types.Scene.ShowModTab = bpy.props.BoolProperty()
+	bpy.types.Scene.ShowModTab = bpy.props.BoolProperty(default = True)
+	bpy.types.Scene.ApplyModifier = bpy.props.BoolProperty(default = False)
 	
 
 def unregister():
 	bpy.utils.unregister_module(__name__)
 	del bpy.types.Scene.ShowModTab
-	
+	del bpy.types.Scene.ApplyModifier
 
 if __name__ == "__main__":
 	register()
